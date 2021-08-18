@@ -8,9 +8,10 @@ Pin the tab that has your music, and continue with your usual browsing. The exte
 The extension works by simulating the spacebar, so it will work for every site that can be paused and resumed with the spacebar. Only have one tab pinned otherwise the you may get undesired results.
 
 ## Installation
-1. Navigate to `chrome://extensions`
-2. Enable developer mode
-3. Drag the .crx file into page
+1. Download the .crx file from [releases](https://github.com/OwOSwordsman/AutoBGM/releases/)
+2. Navigate to `chrome://extensions`
+3. Enable developer mode
+4. Drag the .crx file into the page
 
 Alternatively, you can download/clone this repo and load the /src folder.
 
