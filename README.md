@@ -7,6 +7,13 @@ Pin the tab that has your music, and continue with your usual browsing. The exte
 
 The extension works by simulating the spacebar, so it will work for every site that can be paused and resumed with the spacebar. Only have one tab pinned otherwise the you may get undesired results.
 
+## Installation
+1. Navigate to [chrome://extensions](chrome://extensions/)
+2. Enable developer mode
+3. Drag the .crx file into page
+
+Alternatively, you can download/clone this repo and load the /src folder.
+
 ## Credits
  - [Codevolution's Chrome Extension Tutorial](https://youtube.com/playlist?list=PLC3y8-rFHvwg2-q6Kvw3Tl_4xhxtIaNlY) for the short and detailed videos
  - [MusicControllerChromeExtension](https://github.com/MathiasGilson/MusicControllerChromeExtension) for giving me the idea of controlling the audio with the Spacebar
