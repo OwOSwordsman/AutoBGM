@@ -1,5 +1,6 @@
 // listen for tab updates
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    console.log(changeInfo);
     isAudible = changeInfo.audible;
     isReloaded = changeInfo.status;
 
@@ -15,7 +16,9 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             // retrieve autoPaused value from local storage
             chrome.storage.local.get("autoPaused", function (key) {
                 autoPaused = key.autoPaused;
-                if ((autoPaused || musicTab.audible) && (tab.id != musicTab.id && isAudible != null)) {
+
+
+                if ((autoPaused || musicTab.audible) && (tab.id != musicTab.id && (isAudible != null))) {
                     // checks for when multiple tabs may be playing audio
                     chrome.tabs.query({ pinned: false, audible: true }, function (playingTabs) {
                         // set autoPaused flag
@@ -38,5 +41,20 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 }
             });
         }
+    });
+});
+
+// listen for tabs closing
+chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
+    chrome.tabs.query({ pinned: false, audible: true }, function (playingTabs) {
+        if (playingTabs.length == 0) {
+            chrome.storage.local.set({ "autoPaused": false });
+        }
+
+        // run js on first pinned tab
+        chrome.scripting.executeScript({
+            files: ['controlAudio.js'],
+            target: { tabId: musicTab.id }
+        });
     });
 });
