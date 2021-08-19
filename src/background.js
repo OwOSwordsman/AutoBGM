@@ -1,12 +1,16 @@
 // listen for tab updates
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     isAudible = changeInfo.audible;
-    isReloaded = changeInfo.status;
+    isReloaded = changeInfo.status == 'complete';
+
+    // criteria not met, exit
+    if (isAudible == null && !isReloaded) {
+        return;
+    }
 
     // get first pinned tab
     chrome.tabs.query({ pinned: true }, function (tabs) {
         musicTab = tabs[0];
-
         if (tab.id == musicTab.id && isReloaded) {   // reset autoPaused flag on pinned tab reload
             chrome.storage.local.set({ "autoPaused": false });
 

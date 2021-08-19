@@ -1,7 +1,7 @@
 {
     "name": "AutoBGM",
     "description": "Auto play/pause your music.",
-    "version": "0.1",
+    "version": "0.2",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
