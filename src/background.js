@@ -54,10 +54,13 @@ chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
             autoPaused = key.autoPaused;
             if (playingTabs.length == 0 && autoPaused) {
                 chrome.storage.local.set({ "autoPaused": false });
-                // run js on first pinned tab
-                chrome.scripting.executeScript({
-                    files: ['controlAudio.js'],
-                    target: { tabId: musicTab.id }
+                chrome.tabs.query({ pinned: true }, function (tabs) {
+                    musicTab = tabs[0];
+                    // run js on first pinned tab
+                    chrome.scripting.executeScript({
+                        files: ['controlAudio.js'],
+                        target: { tabId: musicTab.id }
+                    });
                 });
             }
         });
