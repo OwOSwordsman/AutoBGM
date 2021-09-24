@@ -66,3 +66,15 @@ chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
         });
     });
 });
+
+// play/pause audio via keybind
+chrome.commands.onCommand.addListener(function (command) {
+    chrome.tabs.query({ pinned: true }, function (tabs) {
+        musicTab = tabs[0];
+        // run js on first pinned tab
+        chrome.scripting.executeScript({
+            files: ['controlAudio.js'],
+            target: { tabId: musicTab.id }
+        });
+    });
+});
